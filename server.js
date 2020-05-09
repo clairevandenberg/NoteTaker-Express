@@ -12,6 +12,8 @@ app.use(express.json());
 let notes = []; // empty array for storing notes 
 
 // GET route 
+app.use(express.static('public')); 
+
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
@@ -27,16 +29,16 @@ app.get("/api/notes", function(req, res) {
 // POST route 
 app.post("/api/notes", function(req, res) {
     console.log(notes);
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
-    if (err) { 
-    throw err;
-    } else {
-    return res.json(notes);
+    notes.push(req.body);
+    fs.readFile(path.join(__dirname, "/db/db.json"));
+   JSON.stringify(notes),
+   fs.writeFile("./db/db.json", notesSaved)
+    if (err) throw err;
+    else { return res.json(notes);
     };
 });
 
-
-//DELETE route 
+// DELETE route 
 app.delete("/api/notes: id", function(req, res) {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
     if (err) { 
@@ -46,7 +48,7 @@ app.delete("/api/notes: id", function(req, res) {
     };
 });
 
-//start server to begin listening 
+// start server to begin listening 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
