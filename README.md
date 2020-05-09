@@ -19,7 +19,7 @@ For users that need to keep track of a lot of information, it's easy to forget o
 ## Test my code [here](https://)
 
 ## Screenshot
-![Image description](ScreenShot.png)
+![Image description](screenshot.png)
 
 ## Author 
 Claire Vandenberg, 2020 
