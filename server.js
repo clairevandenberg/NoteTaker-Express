@@ -48,18 +48,18 @@ app.get("/api/notes", function(req, res) {
 
 // DELETE route 
 app.delete("/api/notes: id", function(req, res) {
-    fs.sendFile(path.join(__dirname, "/public/notes.html"));
+    fs.readFile(path.join(__dirname, "/public/notes.html"));
         if (err) { 
         throw err;
-        } 
+        } else {
+console.log(data)
 
- console.log(data)
-   
 let parseNotes = JSON.parse(data);
 console.log (parseNotes);
-res.send(parseNotes);
-});
 
+return res.send(parseNotes);
+}
+});
 
 // start server to begin listening 
 app.listen(PORT, function () {
