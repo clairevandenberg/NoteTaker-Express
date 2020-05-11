@@ -11,6 +11,32 @@ app.use(express.json());
 
 let notes = []; // empty array for storing notes 
 
+// POST route 
+app.post(`/api/notes`, function(req, res) {
+
+    // push users note to notes array
+    notes.push(req.body);
+    let notes = userNotes;
+    
+    let userNotes =  fs.readFile(path.join(__dirname, "/db/db.json"));
+
+    JSON.parse(userNotes),
+    notes.push(notes);
+
+    userNotes = JSON.stringify(userNotes);
+    console.log(userNotes);
+
+    fs.writeFile(path.join(__dirname, "./db/db.json"), userNotes, `utf8`, function (error) {
+       if (err){
+        console.log( "You have an Error");
+    } else { 
+        return res.json(notes);
+        console.log("Your note has been saved");
+        };
+    });
+});
+
+
 // GET route 
 app.use(express.static('public')); 
 
@@ -26,26 +52,17 @@ app.get("/api/notes", function(req, res) {
 });
 
 
-// POST route 
-app.post("/api/notes", function(req, res) {
-    console.log(notes);
-    notes.push(req.body);
-    fs.readFile(path.join(__dirname, "/db/db.json"));
-   JSON.stringify(notes),
-   fs.writeFile("./db/db.json", notesSaved)
-    if (err) throw err;
-    else { return res.json(notes);
-    };
-});
 
 // DELETE route 
 app.delete("/api/notes: id", function(req, res) {
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
+    fs.sendFile(path.join(__dirname, "/public/notes.html"));
     if (err) { 
     throw err;
-    } else {
-    return res.json(notes);
-    };
+    } 
+    console.log(data)
+    let parseNotes = JSON.parse(data);
+    console.log (parseNotes);
+    res.send(parseNotes);
 });
 
 // start server to begin listening 
